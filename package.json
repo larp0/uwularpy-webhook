@@ -1,0 +1,20 @@
+{
+  "name": "uwularpy-webhook",
+  "version": "1.0.0",
+  "description": "GitHub App webhook handler for uwuifying markdown files",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "@octokit/auth-app": "^4.0.13",
+    "@octokit/rest": "^19.0.13",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "child_process": "^1.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

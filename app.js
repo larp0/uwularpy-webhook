@@ -53,6 +53,23 @@ async function createBranch(octokit, owner, repo, issueNumber) {
   return branchName;
 }
 
+// Post an immediate reply comment
+async function postReplyComment(octokit, owner, repo, issueNumber) {
+  try {
+    // Post the reply comment
+    await octokit.issues.createComment({
+      owner,
+      repo,
+      issue_number: issueNumber,
+      body: "see you, uwuing..."
+    });
+    
+    console.log(`Posted immediate reply to issue #${issueNumber}`);
+  } catch (error) {
+    console.error('Error posting reply comment:', error);
+  }
+}
+
 // Add uwuify script to the repository
 async function addUwuifyScript(octokit, owner, repo, branch) {
   // Content of the uwuify script
@@ -257,6 +274,9 @@ app.post('/webhook', async (req, res) => {
             installationId: payload.installation.id,
           },
         });
+        
+        // Post an immediate reply comment for validation
+        await postReplyComment(octokit, owner, repo, issueNumber);
         
         // Create a new branch
         const branch = await createBranch(octokit, owner, repo, issueNumber);
